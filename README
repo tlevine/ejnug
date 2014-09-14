@@ -1,0 +1,14 @@
+Ejnug
+===========
+Publishing emails publically
+
+Installing
+-----------------
+Install this package. ::
+
+    pip3 install ejnug
+
+Requirements that aren't in PyPI
+
+* offlineimap (Well it is in PyPI, but ``setup.py`` doesn't install it.)
+* notmuch
