@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from notmuch import Database, Query
 from bottle import Bottle, request, response, abort, redirect, view, TEMPLATE_PATH
 
@@ -64,4 +65,5 @@ def recent():
         'list': messages,
     }
 
-app.run()
+if __name__ == '__main__':
+    app.run()
