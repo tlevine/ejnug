@@ -21,7 +21,10 @@ def search(querystr):
     if query.count_messages() == 1:
         message = next(iter(query.search_messages()))
         title = message.get_header('subject')
-        body = message.get_part(1)
+        try:
+            body = message.get_part(1)
+        except UnicodeDecodeError:
+            body = 'There was an encoding problem with this message.'
     else:
         title = 'Results for "%s"' % querystr
         body = None
@@ -32,21 +35,22 @@ def search(querystr):
         'threads': query.search_threads(),
     }
 
-@app.get('/:querystr/:part')
-@view('message')
-def attachment(querystr, part):
+@app.get('/:querystr/:num')
+def attachment(querystr, num):
     query = Query(db, querystr)
     if query.count_messages() != 1:
         redirect('/' + querystr)
     else:
         message = next(iter(query.search_messages()))
         parts = message.get_message_parts()
-        i = part - 1
+        i = int(num) - 1
         if i >= len(parts):
             redirect('/' + querystr)
-      # else:
-      #     content type
-      #     message.get_part(part)
+        else:
+            part = parts[i]
+            response.content_type = part.get_content_type()
+         #  response.charset = part.get_content_charset()
+            return part.get_payload()
 
 if __name__ == '__main__':
     app.run()
