@@ -10,6 +10,7 @@ setup(name='ejnug',
           'bottle>=0.12.7',
           'notmuch>=0.15.2',
           'Unidecode>=0.04.16',
+          'CherryPy>=3.6.0',
       ]
       tests_require = ['nose'],
       scripts = ['ejnug.py'],
