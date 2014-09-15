@@ -74,9 +74,9 @@ def attachment(querystr, num):
             response.content_type = content_type
          #  response.charset = part.get_content_charset()
 
-            fn = part.get_filename()
+            fn = part.get_filename().replace('"', '')
             if fn != None:
-                response.headers['content-disposition'] = 'filename=%s;' % unidecode(fn)
+                response.headers['content-disposition'] = 'filename="%s";' % unidecode(fn)
 
             payload = message.get_part(n)
             if 'html' in content_type.lower():
