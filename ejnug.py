@@ -8,9 +8,9 @@ TEMPLATE_PATH.append('views')
 app = Bottle()
 db = Database()
 
-@app.route('/<identifier>')
-def slash(identifier):
-    redirect('/' + identifier.rstrip('/') + '/')
+@app.route('/!/<querystr>')
+def slash(querystr):
+    redirect('/!/' + querystr.rstrip('/') + '/')
 
 @app.route('/')
 def home():
@@ -74,9 +74,9 @@ def attachment(querystr, num):
             response.content_type = content_type
          #  response.charset = part.get_content_charset()
 
-            fn = part.get_filename().replace('"', '')
+            fn = part.get_filename()
             if fn != None:
-                response.headers['content-disposition'] = 'filename="%s";' % unidecode(fn)
+                response.headers['content-disposition'] = 'filename="%s";' % unidecode(fn).replace('"', '')
 
             payload = message.get_part(n)
             if 'html' in content_type.lower():
