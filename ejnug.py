@@ -14,9 +14,9 @@ def slash(identifier):
 
 @app.route('/')
 def home():
-    pass
+    return 'Public messages'
 
-@app.get('/:querystr/')
+@app.get('/!/:querystr/')
 @view('thread')
 def search(querystr):
     query = Query(db, querystr)
@@ -56,18 +56,18 @@ def subhierarchy(message):
             'replies': list(subhierarchy(reply)),
         }
 
-@app.get('/:querystr/:num')
+@app.get('/!/:querystr/:num')
 def attachment(querystr, num):
     n = int(num)
     query = Query(db, querystr)
     if query.count_messages() != 1:
-        redirect('/%s/' % querystr)
+        redirect('/!/%s/' % querystr)
     else:
         message = next(iter(query.search_messages()))
         parts = message.get_message_parts()
         i = n - 1
         if i >= len(parts):
-            redirect('/%s/' % querystr)
+            redirect('/!/%s/' % querystr)
         else:
             part = parts[i]
             content_type = part.get_content_type()
