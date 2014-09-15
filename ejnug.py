@@ -37,8 +37,22 @@ def search(querystr):
         'title': title,
         'parts': parts,
         'body': body,
-        'threads': query.search_threads(),
+        'threads': list(hierarchy(query)),
     }
+
+def hierarchy(query):
+    for thread in query.search_threads():
+        yield from (list(subhierarchy(message)) for message in thread.get_toplevel_messages())
+           
+
+def subhierarchy(message):
+    for reply in message.get_replies():
+        yield {
+            'message_id': message.get_message_id(),
+            'subject': message.get_header('subject'),
+            'is_match': message.is_match(),
+            'replies': list(subhierarchy(reply)),
+        }
 
 @app.get('/:querystr/:num')
 def attachment(querystr, num):

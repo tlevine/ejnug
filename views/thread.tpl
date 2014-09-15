@@ -14,7 +14,7 @@
       <ul class="threads">
         % for thread in threads:
           <ul>
-          % for message in thread.get_toplevel_messages():
+          % for message in thread:
           % include('subthread.tpl', message = message)
           % end
           </ul>
