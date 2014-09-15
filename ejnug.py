@@ -21,8 +21,8 @@ def search(querystr):
         title = message.get_header('subject')
         body = next(iter(query.search_messages())).get_part(1)
     else:
-        title = 'Search results'
-        body = 'Results for "%s"' % querystr
+        title = 'Results for "%s"' % querystr
+        body = None
 
     return {
         'title': title,
