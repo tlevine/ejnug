@@ -10,60 +10,30 @@ db = Database()
 def slash(identifier):
     redirect('/' + identifier)
 
-@app.get('/searches/:querystr')
-@view('flat')
+@app.route('/'):
+def home():
+    pass
+
+@app.get('/:querystr')
 def search(querystr):
-    query = Query(db, querystr).search_threads()
-    threads = [('/threads/' + t.get_thread_id(), t.get_subject()) \
-               for t in query]
+    query = Query(db, querystr)
+    if query.count_messages() == 1:
+        title = message.get_header('subject')
+        body = next(iter(query.search_messages())).get_part(1)
+    else:
+        title = 'Search results'
+        body = 'Results for "%s"' % querystr
+
     return {
-        'heading': 'Results for "%s"' % querystr,
-        'list': threads
+        'title': title,
+        'body': body,
+        'threads': query.search_threads(),
     }
 
-def _get_thread(thread_id):
-    querystr = 'thread:' + thread_id
-    thread = next(iter(Query(db, querystr).search_threads()))
-    return thread.get_subject()
-
-@app.get('/threads/:thread_id')
-@view('flat')
-def thread(thread_id):
-    query = Query(db, 'thread:%s' % thread_id)
-    if not query.count_threads() == 1:
-        return 'Thread not found', 404
-    messages = [('/messages/' + m.get_message_id(), m.get_header('subject')) \
-                for m in query.search_messages()]
-    return {
-        'heading': _get_thread(thread_id).get_subject(),
-        'list': messages
-    }
-
-@app.get('/messages/:message_id')
-@view('message')
-def message(message_id):
-    query = Query(db, 'id:%s' % message_id)
-    if not query.count_messages() == 1:
-        return 'Message not found', 404
-    m = next(query.search_messages())
-    return {
-        'heading': m.get_header('subject'),
-        'body': m.get_part(1),
-    }
-
-@app.get('/')
-@view('flat')
-def recent():
-    query = Query(db, '')
-    messages = []
-    for i, m in enumerate(query.search_messages()):
-        if i >= 30:
-            break
-        messages.append(('/messages/' + m.get_message_id(), m.get_header('subject')))
-    return {
-        'heading': 'Recent messages',
-        'list': messages,
-    }
-
-if __name__ == '__main__':
-    app.run()
+@app.get('/:querystr/:part')
+def attachment(querystr, part):
+    query = Query(db, querystr)
+    if query.count_messages() != 1:
+        redirect('/' + querystr)
+    else:
+        message = next(iter(query.search_messages())
