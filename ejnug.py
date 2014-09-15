@@ -8,16 +8,12 @@ TEMPLATE_PATH.append('views')
 app = Bottle()
 db = Database()
 
-@app.route('/!/<querystr>')
-def slash(querystr):
-    redirect('/!/' + querystr.rstrip('/') + '/')
-
 @app.route('/')
 @view('home')
 def home():
     return {}
 
-@app.get('/!/:querystr/')
+@app.get('/!/<querystr:path>/')
 @view('thread')
 def search(querystr):
     query = Query(db, querystr)
@@ -57,9 +53,8 @@ def subhierarchy(message):
             'replies': list(subhierarchy(reply)),
         }
 
-@app.get('/!/:querystr/:num')
-def attachment(querystr, num):
-    n = int(num)
+@app.get('/!/<querystr:path>/<n:int>')
+def attachment(querystr, n):
     query = Query(db, querystr)
     if query.count_messages() != 1:
         redirect('/!/%s/' % querystr)
@@ -84,6 +79,15 @@ def attachment(querystr, num):
                 return clean_html(payload)
             else:
                 return payload
+
+@app.route('/!')
+@app.route('/!/')
+def exclaim():
+    redirect('/')
+
+@app.route('/!/<querystr:path>')
+def slash(querystr):
+    redirect('/!/' + querystr.rstrip('/') + '/')
 
 if __name__ == '__main__':
     app.run(server = 'cherrypy', reloader = True, port = 8081)
