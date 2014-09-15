@@ -22,20 +22,17 @@
         % end
       </ul>
 
-      <hr/>
-
       % if body != None:
-      <div class="body">{{body}}</div>
-      % end
-
       <hr/>
-
+      <div class="body">{{body}}</div>
+      <hr/>
       <h1>Attachments</h1>
       <ol>
       % for n, description in parts:
         <li><a href="{{n}}">{{description}}</a></li>
       % end
       </ol>
+      % end
 
     </article>
   </body>

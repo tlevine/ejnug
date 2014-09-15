@@ -13,8 +13,9 @@ def slash(querystr):
     redirect('/!/' + querystr.rstrip('/') + '/')
 
 @app.route('/')
+@view('home')
 def home():
-    return 'Public messages'
+    return {}
 
 @app.get('/!/:querystr/')
 @view('thread')
