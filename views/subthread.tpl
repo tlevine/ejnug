@@ -1,5 +1,5 @@
 <li>
-  <a href="/id:{{message.get_message_id()}}">
+  <a href="/id:{{message.get_message_id()}}/">
     % if message.is_match():
     <strong>
     % end

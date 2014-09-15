@@ -10,6 +10,7 @@
   </head>
   <body>
     <article>
+      <h1>Thread</h1>
       <ul class="threads">
         % for thread in threads:
           <ul>
@@ -19,6 +20,12 @@
           </ul>
         % end
       </ul>
+      <h1>Attachments</h1>
+      <ol>
+      % for n, description in parts:
+        <li><a href="{{n}}">{{description}}</a></li>
+      % end
+      </ol>
       <hr/>
       % if body != None:
       <div class="body">{{body}}</div>
