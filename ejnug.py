@@ -37,7 +37,7 @@ def search(querystr):
         'title': title,
         'parts': parts,
         'body': body,
-        'threads': [], # query.search_threads(),
+        'threads': query.search_threads(),
     }
 
 @app.get('/:querystr/:num')
