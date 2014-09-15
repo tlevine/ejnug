@@ -6,6 +6,7 @@
     html, body, article, .threads { margin: 0; padding: 0; }
     .threads { margin-top: 0.5em; margin-bottom: 0.5em; }
     .threads ul { margin-left: 1em; padding-left: 0.5em; }
+    h1, h2, h3, h4, h5 { font-size: inherit; }
     </style>
   </head>
   <body>
@@ -20,16 +21,22 @@
           </ul>
         % end
       </ul>
+
+      <hr/>
+
+      % if body != None:
+      <div class="body">{{body}}</div>
+      % end
+
+      <hr/>
+
       <h1>Attachments</h1>
       <ol>
       % for n, description in parts:
         <li><a href="{{n}}">{{description}}</a></li>
       % end
       </ol>
-      <hr/>
-      % if body != None:
-      <div class="body">{{body}}</div>
-      % end
+
     </article>
   </body>
 </html>

@@ -8,7 +8,7 @@ db = Database()
 
 @app.route('/<identifier>')
 def slash(identifier):
-    redirect('/' + identifier.rstrip('/'))
+    redirect('/' + identifier.rstrip('/') + '/')
 
 @app.route('/')
 def home():
