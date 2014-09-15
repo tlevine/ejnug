@@ -9,7 +9,7 @@
         % for thread in threads:
           <li><ul>
           % for message in thread.get_toplevel_messages():
-          % include('message.tpl', message = message)
+          % include('subthread.tpl', message = message)
           % end
           </ul></li>
         % end

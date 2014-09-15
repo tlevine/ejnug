@@ -19,8 +19,9 @@ def home():
 def search(querystr):
     query = Query(db, querystr)
     if query.count_messages() == 1:
+        message = next(iter(query.search_messages()))
         title = message.get_header('subject')
-        body = next(iter(query.search_messages())).get_part(1)
+        body = message.get_part(1)
     else:
         title = 'Results for "%s"' % querystr
         body = None
