@@ -15,6 +15,7 @@ def home():
     pass
 
 @app.get('/:querystr')
+@view('thread')
 def search(querystr):
     query = Query(db, querystr)
     if query.count_messages() == 1:
@@ -31,9 +32,17 @@ def search(querystr):
     }
 
 @app.get('/:querystr/:part')
+@view('message')
 def attachment(querystr, part):
     query = Query(db, querystr)
     if query.count_messages() != 1:
         redirect('/' + querystr)
     else:
         message = next(iter(query.search_messages())
+        parts = message.get_message_parts()
+        i = part - 1
+        if i >= len(parts):
+            redirect('/' + querystr)
+        else:
+            content type
+            message.get_part(part)
