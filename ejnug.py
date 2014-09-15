@@ -10,7 +10,7 @@ db = Database()
 def slash(identifier):
     redirect('/' + identifier)
 
-@app.route('/'):
+@app.route('/')
 def home():
     pass
 
@@ -38,11 +38,14 @@ def attachment(querystr, part):
     if query.count_messages() != 1:
         redirect('/' + querystr)
     else:
-        message = next(iter(query.search_messages())
+        message = next(iter(query.search_messages()))
         parts = message.get_message_parts()
         i = part - 1
         if i >= len(parts):
             redirect('/' + querystr)
-        else:
-            content type
-            message.get_part(part)
+      # else:
+      #     content type
+      #     message.get_part(part)
+
+if __name__ == '__main__':
+    app.run()
