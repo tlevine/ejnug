@@ -7,7 +7,7 @@
     html { background-color: black; color: white; }
     article { margin-top: 0.5em; margin-bottom: 0.5em; }
 
-    html, article, nav, nav ul, nav li,
+    html, article,
     .threads > ul, .attachments > ol,
     .heading p, h1, h2, h3, h4, h5
       { margin: 0; padding: 0; }
@@ -17,19 +17,17 @@
       float: left; list-style-type: none;
       margin-right: 1em;
     }
-    nav { height: 1.1em; }
+    nav > ul { height: 1.1em; margin-top: 0; padding: 0.5em; }
+    nav { background-color: grey; }
 
     .threads > ul ul, .attachments > ol { margin-left: 1em; padding-left: 0.5em; }
     h1, h2, h3, h4, h5 { font-size: inherit; }
     .attachments, .threads { color: grey; }
     .body, .heading { color: white; }
     .heading {
-      border-top: solid 1px grey;
-      margin-top: 0.5em;
-      padding-top: 0.5em;
-      border-bottom: solid 1px grey;
-      margin-bottom: 0.5em;
+      margin-bottom: 1.5em;
       padding-bottom: 0.5em;
+      border-bottom: solid 1px grey;
     }
     a, a:visited, a:hover { color: #fe57a1; } 
     a, a:visited { text-decoration: none; }
@@ -40,7 +38,7 @@
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/!/date:3D../">Recent</a></li>
+        <li><a href="/!/date:yesterday../">Recent</a></li>
         <!-- <li><a href="/!/from:message['/"> -->
       </ul>
     </nav>
@@ -49,13 +47,15 @@
     % message = threads[0][0]
     <div class="heading">
       <h3>{{message['subject']}}</h3>
+      <p><a href="/!/{{message['from']}}/">{{message['from']}}</a></p>
       <p>
-        {{message['weekday]}},
-        <a href="date:{{message['notmuchmonth']}}..{{message['notmuchmonth']}}">{{message['month']}}</a>
-        <a href="date:{{message['notmuchday']}}..{{message['notmuchday']}}">{{message['day']}}</a>,
-        <a href="date:{{message['notmuchyear']}}..{{message['notmuchyear']}}">{{message['year']}}</a>,
+        {{message['weekday']}},
+        <a href="/!/date:{{message['notmuchmonth']}}..{{message['notmuchmonth']}}/">{{message['month']}}</a>
+        <a href="/!/date:{{message['notmuchday']}}..{{message['notmuchday']}}/">{{message['day']}}</a>,
+        {{message['year']}},
         at {{message['time']}}
       </p>
+      <br/>
       <p><a href="{{message['mailto']}}" target="_blank">Reply to this message</a></p>
     </div>
     <article class="body">{{body}}</article>
@@ -70,7 +70,9 @@
     % end
 
     <div class="threads">
+      % if body != None:
       <h3>Thread</h3>
+      % end
       <ul>
         % for thread in threads:
           <ul>

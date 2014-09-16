@@ -86,6 +86,7 @@ def subhierarchy(message):
         'year': d.strftime('%Y'), 
         'time': d.strftime('%H:%M UTC'),
 
+        'from': message.get_header('from'),
         'mailto': 'mailto:%(to)s?subject=%(subject)s&references=%(references)s&in-reply-to=%(in-reply-to)s&body=%(body)s' % mailto,
         'subject': message.get_header('subject'),
         'is_match': message.is_match(),
