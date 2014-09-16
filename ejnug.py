@@ -77,7 +77,7 @@ def subhierarchy(message):
     return {
         'message_id': message.get_message_id(),
 
-        'weekday': d.strtime('%A'),
+        'weekday': d.strftime('%A'),
         'notmuchmonth': d.strftime('%Y-%m'),
         'month': d.strftime('%B'), 
         'notmuchday': d.strftime('%Y-%m-%d'),

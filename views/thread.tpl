@@ -54,7 +54,7 @@
         <a href="date:{{message['notmuchmonth']}}..{{message['notmuchmonth']}}">{{message['month']}}</a>
         <a href="date:{{message['notmuchday']}}..{{message['notmuchday']}}">{{message['day']}}</a>,
         <a href="date:{{message['notmuchyear']}}..{{message['notmuchyear']}}">{{message['year']}}</a>,
-        at {{message['time']}
+        at {{message['time']}}
       </p>
       <p><a href="{{message['mailto']}}" target="_blank">Reply to this message</a></p>
     </div>
