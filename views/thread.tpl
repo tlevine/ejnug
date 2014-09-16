@@ -3,7 +3,8 @@
     % message = threads[0][0]
     <div class="heading">
       <h3>{{message['subject']}}</h3>
-      <p><a href="/!/{{message['from']}}/">{{message['from']}}</a></p>
+      <p>From <a href="/!/{{message['from']}}/">{{message['from']}}</a></p>
+      <p>To <a href="/!/{{message['to']}}/">{{message['to']}}</a></p>
       <p>
         {{message['weekday']}},
         <a href="/!/date:{{message['notmuchmonth']}}..{{message['notmuchmonth']}}/">{{message['month']}}</a>

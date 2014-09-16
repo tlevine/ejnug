@@ -75,6 +75,7 @@ def subhierarchy(message):
     references = references + message.get_message_id()
     mailto = {
         'to': to,
+        'cc': 'Thomas Levine <public@thomaslevine.com>',
         'subject': subject,
         'references': references,
         'in-reply-to': message.get_message_id(),
@@ -96,7 +97,8 @@ def subhierarchy(message):
         'time': d.strftime('%H:%M UTC'),
 
         'from': message.get_header('from'),
-        'mailto': 'mailto:%(to)s?subject=%(subject)s&references=%(references)s&in-reply-to=%(in-reply-to)s&body=%(body)s' % mailto,
+        'to': message.get_header('to'),
+        'mailto': 'mailto:%(to)s?cc=%(cc)s&subject=%(subject)s&references=%(references)s&in-reply-to=%(in-reply-to)s&body=%(body)s' % mailto,
         'subject': message.get_header('subject'),
         'is_match': message.is_match(),
         'replies': [subhierarchy(reply) for reply in message.get_replies()]
