@@ -6,7 +6,8 @@
   need to find things when they're there because other
   people find them for me. So please send email to
   <a href="mailto:Thomas Levine <public@thomaslevine.com>">public@thomaslevine.com</a>
-  if it can be public. And keep using _@thomaslevine.com if it can't.
+  if it can be public. And keep using _@thomaslevine.com
+  for emails that you don't want to be public.
 </p>
 <p>
   I think that making some emails public will make
