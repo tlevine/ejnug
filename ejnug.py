@@ -72,9 +72,20 @@ def subhierarchy(message):
         'body': quote('''In reply to: http://mail.thomaslevine.com/!/id:%s/
 ''' % message.get_message_id())
     }
+
+    d = datetime.datetime.fromtimestamp(message.get_date())
     return {
         'message_id': message.get_message_id(),
-        'date': datetime.datetime.fromtimestamp(message.get_date()).strftime('%A, %d %B, %Y, %H:%M UTC'),
+
+        'weekday': d.strtime('%A'),
+        'notmuchmonth': d.strftime('%Y-%m'),
+        'month': d.strftime('%B'), 
+        'notmuchday': d.strftime('%Y-%m-%d'),
+        'day': d.strftime('%d'), 
+        'notmuchyear': d.strftime('%Y'),
+        'year': d.strftime('%Y'), 
+        'time': d.strftime('%H:%M UTC'),
+
         'mailto': 'mailto:%(to)s?subject=%(subject)s&references=%(references)s&in-reply-to=%(in-reply-to)s&body=%(body)s' % mailto,
         'subject': message.get_header('subject'),
         'is_match': message.is_match(),
