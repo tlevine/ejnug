@@ -5,7 +5,10 @@ import datetime
 from unidecode import unidecode
 from lxml.html.clean import clean_html
 from notmuch import Database, Query
-from bottle import Bottle, request, response, abort, redirect, view, TEMPLATE_PATH
+from bottle import Bottle, request, response, \
+                   abort, redirect, \
+                   view, TEMPLATE_PATH, \
+                   static_file
 
 TEMPLATE_PATH.append('views')
 app = Bottle()
@@ -14,6 +17,10 @@ app = Bottle()
 @view('home')
 def home():
     return {}
+
+@app.route('/style.css')
+def css():
+    return static_file('style.css', root = '.')
 
 @app.get('/!/<querystr:path>/')
 @view('thread')
