@@ -6,7 +6,6 @@ from bottle import Bottle, request, response, abort, redirect, view, TEMPLATE_PA
 
 TEMPLATE_PATH.append('views')
 app = Bottle()
-db = Database()
 
 @app.route('/')
 @view('home')
@@ -16,6 +15,7 @@ def home():
 @app.get('/!/<querystr:path>/')
 @view('thread')
 def search(querystr):
+    db = Database()
     query = Query(db, querystr)
     if query.count_messages() == 1:
         message = next(iter(query.search_messages()))
@@ -55,6 +55,7 @@ def subhierarchy(message):
 
 @app.get('/!/<querystr:path>/<n:int>')
 def attachment(querystr, n):
+    db = Database()
     query = Query(db, querystr)
     if query.count_messages() != 1:
         redirect('/!/%s/' % querystr)
