@@ -3,30 +3,46 @@
     <!-- <link rel="stylesheet" href="/.css" type="text/css" /> -->
     <style>
     .body { white-space: pre; }
-    html, body, article,
 
+    html { background-color: black; color: white; }
+
+    html, body, article, nav, nav ul, nav li,
     .threads, .threads > ul,
     .heading p, h1, h2, h3, h4, h5
       { margin: 0; padding: 0; }
 
+    nav > ul > li {
+      float: left; list-style-type: none;
+      margin-right: 1em;
+    }
+    nav { height: 2em; }
+
     .threads > ul ul { margin-left: 1em; padding-left: 0.5em; }
     h1, h2, h3, h4, h5 { font-size: inherit; }
     .attachments, .threads { color: grey; }
-    .body, .heading { color: black; }
+    .body, .heading { color: white; }
     .heading {
-      border-top: solid 1px black;
+      border-top: solid 1px grey;
       margin-top: 0.5em;
       padding-top: 0.5em;
-      border-bottom: solid 1px black;
+      border-bottom: solid 1px grey;
       margin-bottom: 0.5em;
       padding-bottom: 0.5em;
     }
-    a, a:visited, a:hover { color: inherit; }
+    a, a:visited, a:hover { color: #fe57a1; }
     a:hover { text-decoration: underline; }
     </style>
   </head>
   <body>
     <article>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/!/date:3D../">Recent</a></li>
+          <!-- <li><a href="/!/from:message['/"> -->
+        </ul>
+      </nav>
+
       <div class="threads">
         <ul>
           % for thread in threads:
