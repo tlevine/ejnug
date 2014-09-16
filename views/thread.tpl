@@ -38,4 +38,7 @@
           </ul>
         % end
       </ul>
+      % if len(threads) == 100:
+      <emph>Only the first 100 threads are displayed.</emph>
+      % end
     </div>

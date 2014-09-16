@@ -50,9 +50,11 @@ def search(querystr):
     }
 
 def hierarchy(query):
-    for thread in query.search_threads():
+    for i, thread in enumerate(query.search_threads()):
         yield [subhierarchy(message) for message in thread.get_toplevel_messages()]
-           
+        if i >= 100:
+            # Stop after 100 threads
+            break
 
 def subhierarchy(message):
     '''
