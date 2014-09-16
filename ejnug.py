@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+from urllib.parse import quote
+import datetime
+
 from unidecode import unidecode
 from lxml.html.clean import clean_html
 from notmuch import Database, Query
@@ -45,8 +48,34 @@ def hierarchy(query):
            
 
 def subhierarchy(message):
+    '''
+    Annoyingly, see the note on "unsafe headers" RFC 2368.
+    http://tools.ietf.org/html/rfc2368
+    '''
+    to = message.get_header('reply-to')
+    if to == '':
+        to = message.get_header('from')
+
+    subject = message.get_header('subject')
+    if not subject.lower().startswith('re'):
+        subject = 'RE: ' + subject
+
+    references = message.get_header('references')
+    if references != '':
+        references = references + '\n'
+    references = references + message.get_message_id()
+    mailto = {
+        'to': to,
+        'subject': subject,
+        'references': references,
+        'in-reply-to': message.get_message_id(),
+        'body': quote('''In reply to: http://mail.thomaslevine.com/!/id:%s/
+''' % message.get_message_id())
+    }
     return {
         'message_id': message.get_message_id(),
+        'date': datetime.datetime.fromtimestamp(message.get_date()).strftime('%A, %d %B, %Y, %H:%M UTC'),
+        'mailto': 'mailto:%(to)s?subject=%(subject)s&references=%(references)s&in-reply-to=%(in-reply-to)s&body=%(body)s' % mailto,
         'subject': message.get_header('subject'),
         'is_match': message.is_match(),
         'replies': [subhierarchy(reply) for reply in message.get_replies()]
