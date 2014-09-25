@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os
-from urllib.parse import quote
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
 import datetime
 
 from unidecode import unidecode
