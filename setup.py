@@ -5,7 +5,7 @@ setup(name = 'ejnug',
       author = 'Thomas Levine',
       author_email = '_@thomaslevine.com',
       description = 'Share emails publically',
-      url = 'https://github.com/tlevine/ejnug',
+      url = 'http://mail.thomaslevine.com',
       install_requires = [
           'lxml>=3.3.5',
           'bottle>=0.12.7',
@@ -19,4 +19,8 @@ setup(name = 'ejnug',
       version = '0.0.1',
       license = 'AGPL',
       include_package_data = True,
+      classifiers=[
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3.4',
+      ],
 )
