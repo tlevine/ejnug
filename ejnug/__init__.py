@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 from urllib.parse import quote
 import datetime
 
@@ -10,7 +11,7 @@ from bottle import Bottle, request, response, \
                    view, TEMPLATE_PATH, \
                    static_file
 
-TEMPLATE_PATH.append('views')
+TEMPLATE_PATH.append(os.path.join(os.path.split(__file__)[0], 'views'))
 app = Bottle()
 
 @app.route('/')
