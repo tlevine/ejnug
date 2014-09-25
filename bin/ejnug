@@ -2,4 +2,4 @@
 import sys
 sys.path.insert(0, '.')
 from ejnug import app
-app.run(server = 'cherrypy', reloader = True, port = 8081, host = 'localhost')
+app.run(server = 'cherrypy', reloader = True, port = 8081, host = '127.0.0.1')
