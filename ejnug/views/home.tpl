@@ -23,7 +23,8 @@
 </p>
 <h2>Inconveniences</h2>
 <p>
-  Here are two things I don't like about the present system.
+  Here are two things I don't like about the present software
+  <a href="https://pypy.python.org/pypi/ejnug">ejnug</a>.
 </p>
 <p>
   First, email addresses are made public, and I think some people

@@ -4,11 +4,21 @@ Publishing emails publically
 
 Installing
 -----------------
-Install this package. ::
+Installing this package is easy. ::
 
-    pip3 install ejnug
+    pip install ejnug
 
-Requirements that aren't in PyPI
+(It works in Python 2.7 and 3.4.)
 
-* offlineimap (Well it is in PyPI, but ``setup.py`` doesn't install it.)
-* notmuch
+This doesn't set up the notmuch database, so you have to do that yourself.
+You might use offlineimap to acquire your emails in a maildir, and then you
+can configure notmuch to index that maildir.
+
+Running
+---------------------
+Run this as the user that has the notmuch database configured. ::
+
+    ejnug
+
+This will create a web server on http://localhost:8081, and you can create
+a proxy to that from Nginx or whatever if you want a prettier name.
