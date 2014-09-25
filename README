@@ -14,6 +14,10 @@ This doesn't set up the notmuch database, so you have to do that yourself.
 You might use offlineimap to acquire your emails in a maildir, and then you
 can configure notmuch to index that maildir.
 
+Actually, this doesn't install properly because the stuff in ``MANIFEST.in``
+doesn't get copied. But it does when I install locally with ``pip install .``.
+Huh?
+
 Running
 ---------------------
 Run this as the user that has the notmuch database configured. ::
