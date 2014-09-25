@@ -11,7 +11,8 @@ from bottle import Bottle, request, response, \
                    view, TEMPLATE_PATH, \
                    static_file
 
-TEMPLATE_PATH.append(os.path.join(os.path.split(__file__)[0], 'views'))
+EJNUG_DIR = os.path.split(__file__)[0]
+TEMPLATE_PATH.append(os.path.join(EJNUG_DIR, 'views'))
 app = Bottle()
 
 @app.route('/')
@@ -21,7 +22,7 @@ def home():
 
 @app.route('/style.css')
 def css():
-    return static_file('style.css', root = '.')
+    return static_file('style.css', root = EJNUG_DIR)
 
 @app.get('/!/<querystr:path>/')
 @view('thread')
