@@ -1,0 +1,2 @@
+from ejnug import app
+app.run(server = 'cherrypy', reloader = True, port = 8081)

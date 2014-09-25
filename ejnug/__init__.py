@@ -140,6 +140,3 @@ def exclaim():
 @app.route('/!/<querystr:path>')
 def slash(querystr):
     redirect('/!/' + querystr.rstrip('/') + '/')
-
-if __name__ == '__main__':
-    app.run(server = 'cherrypy', reloader = True, port = 8081)

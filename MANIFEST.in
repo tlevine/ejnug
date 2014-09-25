@@ -1,0 +1,2 @@
+include ejnug/style.css
+recursive-include ejnug/views *
