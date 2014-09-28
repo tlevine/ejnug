@@ -59,3 +59,15 @@ def subhierarchy(message):
         'replies': [subhierarchy(reply) for reply in message.get_replies()]
     }
 
+def separate_name_address(name_address):
+    bracket = re.match(r' *([^<]+)<([^>]+)> *', name_address)
+    space = re.match(r' *([^ ]+) *', name_address)
+    if bracket != None:
+        name = bracket.group(1).strip()
+        address = bracket.group(2).strip()
+    elif space != None:
+        name = None
+        address = space.group(1)
+    else:
+        name = address = None
+    return name, address
