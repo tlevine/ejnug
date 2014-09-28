@@ -1,4 +1,8 @@
 import datetime
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
 
 def hierarchy(query):
     for i, thread in enumerate(query.search_threads()):

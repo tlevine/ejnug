@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 import os
-try:
-    from urllib.parse import quote
-except ImportError:
-    from urllib import quote
 
 from unidecode import unidecode
 from lxml.html.clean import clean_html
@@ -12,6 +8,8 @@ from bottle import Bottle, request, response, \
                    abort, redirect, \
                    view, TEMPLATE_PATH, \
                    static_file
+
+from .queries import hierarchy, subhierarchy
 
 EJNUG_DIR = os.path.split(__file__)[0]
 TEMPLATE_PATH.append(os.path.join(EJNUG_DIR, 'views'))
