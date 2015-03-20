@@ -30,13 +30,14 @@ def subhierarchy(message):
     references = references + message.get_message_id()
     mailto = {
         'to': to,
-        'cc': 'Thomas Levine <public@thomaslevine.com>',
         'subject': subject,
         'references': references,
         'in-reply-to': message.get_message_id(),
         'body': quote('''In reply to: http://mail.thomaslevine.com/!/id:%s/
 ''' % message.get_message_id())
     }
+    if not to.endswith('@thomaslevine.com'):
+        mailto['cc']: 'Thomas Levine <_@thomaslevine.com>'
 
     d = datetime.datetime.fromtimestamp(message.get_date())
     return {
